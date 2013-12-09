@@ -1,4 +1,5 @@
 require "paint"
+require "rouge"
 
 module XCPretty
 
