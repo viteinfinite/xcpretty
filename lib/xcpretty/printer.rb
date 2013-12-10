@@ -18,20 +18,25 @@ module XCPretty
     # $4 = reason
     FAILING_TEST_MATCHER = /(.+:\d+):\serror:\s[\+\-]\[(.*)\s(.*)\]\s:(?:\s'.*'\s\[FAILED\],)?\s(.*)/
 
-    TESTS_DONE_MATCHER = /Test Suite ('.*\.(o|x)ctest(.*)') finished at/
+    TESTS_DONE_MATCHER = /Test Suite ('.*(\.(o|x)ctest(.*))?') finished at/
     # @regex Captured groups
     # $1 test suite name
     TESTS_START_MATCHER = /Test Suite ('.*(\.(o|x)ctest(.*))?') started at/
-    EXECUTED_MATCHER = /^Executed/
+    # @regex Captured groups
+    # $1 failure count
+    EXECUTED_MATCHER = /^Executed \d+ tests, with (\d+) failures/
 
     include ANSI
 
     def pretty_print(text)
       update_test_state(text)
       formatted_text = pretty_format(text)
-      formatted_text = format_test_summary(text) if formatted_text.empty?
 
       STDOUT.print(formatted_text + optional_newline) unless formatted_text.empty?
+    end
+
+    def finish
+      STDOUT.print(test_summary(@test_summary_text || ""))
     end
 
     def update_test_state(text)
@@ -40,15 +45,8 @@ module XCPretty
         store_failure($1, $2, $3, $4)
       when TESTS_DONE_MATCHER
         @tests_done = true
-      end
-    end
-
-    def format_test_summary(text)
-      if text =~ EXECUTED_MATCHER && @tests_done && !@printed_summary
-        @printed_summary = true
-        test_summary(text)
-      else
-        ""
+      when EXECUTED_MATCHER
+        @test_summary_text = text
       end
     end
 

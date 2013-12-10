@@ -31,3 +31,4 @@ end
 ARGF.each_line do |line|
   printer.pretty_print(line)
 end
+printer.finish
