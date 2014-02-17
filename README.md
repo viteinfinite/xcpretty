@@ -113,7 +113,7 @@ $ time xctool -project ReactiveCocoa.xcodeproj -scheme ReactiveCocoa test
 ```
 
 
-## Thanks
+## Team
 
-- [Delisa Mason](http://github.com/kattrali) - for being a part of this
-- [Fred Potter](http://github.com/fpotter) for making xctool and inspiring us
+- Marin Usalj [@mneorr](https://github.com/mneorr) | [mneorr.com](http://mneorr.com)
+- Delisa Mason [@kattrali](https://github.com/kattrali) | [delisa.me](http://delisa.me)
