@@ -105,4 +105,5 @@ After do
   FileUtils.rm_rf(XCPretty::JUnit::FILEPATH)
   FileUtils.rm_rf(XCPretty::HTML::FILEPATH)
   FileUtils.rm_rf(XCPretty::JSONCompilationDatabase::FILEPATH)
+  FileUtils.rm_rf(XCPretty::KIFHTML::FILEPATH)
 end
