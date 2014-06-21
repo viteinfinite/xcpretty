@@ -3,6 +3,7 @@ module XCPretty
 
     include XCPretty::FormatMethods
     FILEPATH = 'build/reports/kif_tests.html'
+    KIF_SCREENSHOTS = 'build/reports'
     TEMPLATE = File.expand_path('../../../../assets/kif_report.html.erb', __FILE__)
 
     def load_dependencies
@@ -65,12 +66,22 @@ module XCPretty
     end
 
     def write_report
+      load_screenshots
+      # TODO: Create gif from pngs
       File.open(@filepath, 'w') do |f|
         test_suites = @test_suites
         fail_count  = @fail_count
         test_count  = @test_count
         erb = ERB.new(File.open(TEMPLATE, 'r').read)
         f.write erb.result(binding)
+      end
+    end
+
+    def load_screenshots
+      Dir.foreach(KIF_SCREENSHOTS) do |item|
+        next if item == '.' or item == '..' or File.extname(item) != ".png"
+        # TODO: compare and store image filename to test name
+        puts item
       end
     end
   end
