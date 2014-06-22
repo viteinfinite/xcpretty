@@ -3,7 +3,7 @@ module XCPretty
 
     include XCPretty::FormatMethods
     FILEPATH = 'build/reports/kif_tests.html'
-    KIF_SCREENSHOTS = 'build/reports' # TODO: Check for global KIF_SCREENSHOT var
+    KIF_SCREENSHOTS = 'build/reports'
     TEMPLATE = File.expand_path('../../../../assets/kif_report.html.erb', __FILE__)
 
     def load_dependencies
@@ -11,6 +11,7 @@ module XCPretty
         require 'fileutils'
         require 'pathname'
         require 'erb'
+        require 'rmagick'
         @@loaded = true
       end
     end
@@ -68,8 +69,6 @@ module XCPretty
 
     def write_report
       load_screenshots
-      write_animated_gifs
-      # TODO: Create gif from pngs
       File.open(@filepath, 'w') do |f|
         test_suites = @test_suites
         fail_count  = @fail_count
@@ -96,8 +95,5 @@ module XCPretty
       end
     end
 
-    def write_animated_gifs
-      # https://gist.github.com/grough/1988486
-    end
   end
 end
