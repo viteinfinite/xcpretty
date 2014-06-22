@@ -11,6 +11,7 @@ require 'lib/xcpretty/formatters/formatter'
 require 'lib/xcpretty/reporters/junit'
 require 'lib/xcpretty/reporters/html'
 require 'lib/xcpretty/reporters/json_compilation_database'
+
 begin
   require 'json'
 rescue LoadError
