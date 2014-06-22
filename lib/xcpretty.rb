@@ -9,7 +9,6 @@ require "xcpretty/formatters/tap"
 require "xcpretty/reporters/junit"
 require "xcpretty/reporters/html"
 require "xcpretty/reporters/json_compilation_database"
-require "xcpretty/reporters/kif_html"
 
 module XCPretty
 
